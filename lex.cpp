@@ -47,12 +47,20 @@ class Lexer : public Error
         {
             if(isFloat)
                 tokens.push_back(pair(build, "FLOAT"));
-            // else if(typeid(build))
             else
                 tokens.push_back(pair(build, "INT"));
             
             build.clear();
         }
+    }
+
+    void flush_char_token(string& build)
+    {
+        if(!build.empty())
+        {
+            tokend.push_back(pair(build, "STRING"))
+        }
+        build.clear();
     }
 
     vector<pair<string, string>> tokenize(string text)
@@ -89,7 +97,9 @@ class Lexer : public Error
             	words += sym;
             }
             if(sym == ' ')
-                continue;              
+            {
+                flush_char_token(words);
+            }              
             else
                 err(sym);
         }

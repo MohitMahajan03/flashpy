@@ -58,7 +58,7 @@ class Lexer : public Error
     {
         if(!build.empty())
         {
-            tokend.push_back(pair(build, "STRING"))
+            tokens.push_back(pair(build, "STRING"));
         }
         build.clear();
     }

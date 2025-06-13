@@ -10,6 +10,7 @@ componentalize tokenizing for words and digits
 #include<string.h>
 #include<unordered_map>
 #include<vector>
+#include<typeinfo>
 
 using namespace std;
 
@@ -44,8 +45,9 @@ class Lexer : public Error
     {
         if(!build.empty())
         {
-            if(isFloat == true)
+            if(isFloat)
                 tokens.push_back(pair(build, "FLOAT"));
+            // else if(typeid(build))
             else
                 tokens.push_back(pair(build, "INT"));
             
@@ -81,6 +83,10 @@ class Lexer : public Error
                         break;
                     default: err(sym);
                 }
+            }
+            else if (isalpha(sym))
+            {
+            	words += sym;
             }
             if(sym == ' ')
                 continue;              

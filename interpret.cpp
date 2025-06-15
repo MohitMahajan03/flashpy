@@ -14,11 +14,11 @@ class Syntax_Node
     public:
     string id;
     string val;
-    Node* func;
-    Node* condition;
-    Node* expr;
+    Syntax_Node* func;
+    Syntax_Node* condition;
+    Syntax_Node* expr;
 
-    Node(string val, string id)
+    Syntax_Node(string val, string id)
     {
         this->id = id;
         this->val = val;

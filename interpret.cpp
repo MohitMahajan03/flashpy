@@ -5,8 +5,40 @@
 #include<queue>
 #include<math.h>
 #include<string.h>
+#include<unordered_map>
 using namespace std;
 
+
+class Node
+{
+    public:
+    string id;
+    string val;
+    Node* func;
+    Node* condition;
+    Node* expr;
+
+    Node(string val, string id)
+    {
+        this->id = id;
+        this->val = val;
+        this->func = NULL;
+        this->condition = NULL;
+        this->expr = NULL;
+    }
+};
+
+class parse
+{
+    private : 
+    unordered_map<string, string> keywords = {
+        {"is?" : "DECISION"},
+        {"zip" : "LOOP"},
+    };
+
+    // public : 
+
+};
 
 
 // int main()

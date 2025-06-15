@@ -9,7 +9,7 @@
 using namespace std;
 
 
-class Node
+class Syntax_Node
 {
     public:
     string id;

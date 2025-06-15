@@ -32,8 +32,8 @@ class parse
 {
     private : 
     unordered_map<string, string> keywords = {
-        {"is?" : "DECISION"},
-        {"zip" : "LOOP"},
+        {"is?" , "DECISION"},
+        {"zip" , "LOOP"},
     };
 
     // public : 

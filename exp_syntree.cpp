@@ -26,7 +26,7 @@ class Node
 };
 Node* root = NULL;
 
-class Interpret
+class Interpret_Expr
 {
     float acc, buff;
     string operation;
@@ -85,7 +85,7 @@ class Interpret
 };
 
 
-class Syntax : public Interpret
+class Syntax_Expr : public Interpret_Expr
 {
 
     private:

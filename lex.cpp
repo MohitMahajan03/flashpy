@@ -65,49 +65,61 @@ class Lexer : public Error
 
     vector<pair<string, string>> tokenize(string text)
     {
-        tokens.clear();
-        string digits, words;
-
-        for(auto &sym : text)
+        try
         {
-            if(isdigit(sym))
-                digits += sym;
-                // cout<<"digits = "<<digits<<" sym = "<<sym<<endl;
+            tokens.clear();
+            string digits, words;
 
-            else if(!isalnum(sym))
+            for(auto &sym : text)
             {
-                flush_token(digits);
-                switch(sym)
+                if(sym == ' ')
                 {
-                    case '+': tokens.push_back(pair("+", operators[sym]));
-                        break;
-                    case '-': tokens.push_back(pair("-", operators[sym]));
-                        break;
-                    case '*': tokens.push_back(pair("*", operators[sym]));
-                        break;
-                    case '/': tokens.push_back(pair("/", operators[sym]));
-                        break;
-                    case '^': tokens.push_back(pair("^", operators[sym]));
-                        break;
-                    default: err(sym);
+                    if (!words.empty())
+                        flush_char_token(words);
+
+                    continue;
+
+                }              
+                if(isdigit(sym))
+                    digits += sym;
+                    // cout<<"digits = "<<digits<<" sym = "<<sym<<endl;
+
+                else if(!isalnum(sym) && sym != ' ')
+                {
+                    flush_token(digits);
+                    switch(sym)
+                    {
+                        case '+': tokens.push_back(pair("+", operators[sym]));
+                            break;
+                        case '-': tokens.push_back(pair("-", operators[sym]));
+                            break;
+                        case '*': tokens.push_back(pair("*", operators[sym]));
+                            break;
+                        case '/': tokens.push_back(pair("/", operators[sym]));
+                            break;
+                        case '^': tokens.push_back(pair("^", operators[sym]));
+                            break;
+                        default: err(sym);
+                    }
                 }
+                else if (isalpha(sym))
+                {
+                    words += sym;
+                }
+                else
+                    err(sym);
             }
-            else if (isalpha(sym))
-            {
-            	words += sym;
-            }
-            if(sym == ' ')
-            {
-                flush_char_token(words);
-            }              
-            else
-                err(sym);
+            flush_token(digits);
+            cout<<"Generating tokens..."<<endl;
+            for(auto &it : tokens)
+                cout<<it.first<<" : "<<it.second<<" ";
+            cout<<endl;
         }
-        flush_token(digits);
-        cout<<"Generating tokens..."<<endl;
-        for(auto &it : tokens)
-            cout<<it.first<<" : "<<it.second<<" ";
-        cout<<endl;  
+        
+        catch (const exception& e)
+        {
+            cerr<< e.what()<<endl;
+        }
         return tokens;
     }
 };

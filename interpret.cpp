@@ -1,4 +1,4 @@
-// needs exptensice thought and fixing
+// needs extensive thought and fixing
 #include<iostream>
 // #include<conio.h>
 #include<any>

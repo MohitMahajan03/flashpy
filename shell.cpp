@@ -3,7 +3,7 @@
 // #include <conio.h>
 #include "lex.cpp"
 #include "infi.cpp"
-#include "syntree.cpp"
+#include "exp_syntree.cpp"
 #include "interpret.cpp"
 #include <vector>
 #include <queue>
@@ -17,20 +17,20 @@ int main()
 {
     Lexer lex;
     Convert grammar;
-    Syntax syn_tree;
-    Interpret interpret;
+    Syntax_Expr expr_syn_tree;
+    Interpret_Expr interpret;
 
     string text;
     while(1)
     {
         vec.clear();
         cout<<"flashpy > ";
-        cin>>text;
+        getline(cin, text);
         if(text == "exit")
             exit(0);
         vec = lex.tokenize(text);
         vec = grammar.postfix(vec);
-        syn_tree.syntree(vec);
+        expr_syn_tree.syntree(vec);
         
     }
     return 0;
